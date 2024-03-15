@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Downloadable Resources</title>
+    <!-- Bootstrap CSS for styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Downloadable Resources</h1>
+        <ul>
+            {% for resource in resources %}
+                <li>
+                    <h3>{{ resource.title }}</h3>
+                    <p>{{ resource.description }}</p>
+                    <!-- Update the route accordingly if you store the files differently -->
+                    <a href="{{ url_for('download_file', filename=resource.file_url) }}">Download</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Bootstrap JS for interactions -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

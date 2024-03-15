@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipivishta ImpEx Solutions</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        #chatbot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 10px;
+            z-index: 1000;
+        }
+        #chat-responses {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="chatbot">
+    <div id="chat-responses"></div>
+    <textarea id="chat-input"></textarea>
+    <button id="chat-submit">Send</button>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const chatInput = document.getElementById("chat-input");
+    const chatSubmit = document.getElementById("chat-submit");
+    const chatResponses = document.getElementById("chat-responses");
+
+    chatSubmit.addEventListener("click", function(e) {
+        e.preventDefault();
+        const query = chatInput.value.trim();
+        if (query) {
+            fetch('/chatbot', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ query: query }),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const responseElement = document.createElement("p");
+                responseElement.textContent = data.response;
+                chatResponses.appendChild(responseElement);
+                chatInput.value = ''; // Clear input after submission
+            })
+            .catch((error) => {
+                console.error('Error during chatbot communication:', error);
+                const errorElement = document.createElement("p");
+                errorElement.textContent = "Sorry, we couldn't process your request. Please try again later.";
+                chatResponses.appendChild(errorElement);
+            });
+        } else {
+            console.error('Chat input is empty.');
+            const errorElement = document.createElement("p");
+            errorElement.textContent = "Please enter a query before submitting.";
+            chatResponses.appendChild(errorElement);
+        }
+    });
+});
+</script>
+</body>
+</html>

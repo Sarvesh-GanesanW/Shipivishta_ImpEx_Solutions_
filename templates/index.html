@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipivishta ImpEx Solutions</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        #chatbot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 10px;
+            z-index: 1000;
+        }
+        #chat-responses {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Shipivishta ImpEx Solutions</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/services">Services</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/contact">Contact</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/resources">Resources</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container mt-5">
+    <h1>Welcome to Shipivishta ImpEx Solutions</h1>
+    <p>This is your one-stop solution for all import and export services, customs, taxation advice, and regulatory permits based on Indian laws.</p>
+</div>
+
+<div id="chatbot">
+    <div id="chat-responses"></div>
+    <textarea id="chat-input"></textarea>
+    <button id="chat-submit">Send</button>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+</body>
+</html>
